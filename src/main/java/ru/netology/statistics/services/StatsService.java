@@ -2,6 +2,25 @@ package ru.netology.statistics.services;
 
 public class StatsService {
 
+
+    // сумма
+    public long amountSales(long[] sales) {
+        long average = 0;
+        for (long sale : sales) {
+            average += sale;
+        }
+        return average;
+    }
+
+    // среднее
+
+    public long mediumSales(long[] sales) {
+        return amountSales(sales) / 12;
+    }
+
+
+    //минимум
+
     public int minSales(long[] sales) {
         int minMonth = 0;
         int month = 0; // переменная для индекса рассматриваемого месяца в массиве
@@ -16,7 +35,7 @@ public class StatsService {
         return minMonth + 1;
     }
 
-
+    //максимум
     public int maxSales(int[] sales) {
         int maxMonth = 0;
         for (int i = 0; i < sales.length; i++) {
@@ -29,36 +48,11 @@ public class StatsService {
 
     }
 
-    public int mediumSales(int[] sales) {
-        int average = 0;
-        if (sales.length > 0) {
-            int sum = 0;
-            for (int j = 0; j < sales.length; j++) {
-                sum += sales[j];
-            }
-            average = sum / sales.length;
-        }
-        return average;
-    }
-
-    public int amountSales(int[] sales) {
-        int average = 0;
-        for (int i = 0; i < sales.length; i++) {
-            average = average + sales[i];
-        }
-        return average;
-    }
 
     // выше среднего
-    public int aboveAverageSales(int[] sales) {
-        int sum = 0;
-        int average = 0;
+    public int aboveAverageSales(long[] sales) {
+        long average = mediumSales(sales);
         int count = 0;
-
-        for (int i = 0; i < sales.length; i++) {
-            sum = sum + sales[i];
-        }
-        average = sum / sales.length;
 
         for (int i = 0; i < sales.length; i++) {
             if (sales[i] < average) {
@@ -69,16 +63,12 @@ public class StatsService {
 
     }
 
-    public int belowAverageSales(int[] sales) {
-        int sum = 0;
-        int average = 0;
+    // ниже среднего
+
+    public int belowAverageSales(long[] sales) {
+
+        long average = mediumSales(sales);
         int count = 0;
-
-        for (int i = 0; i < sales.length; i++) {
-            sum = sum + sales[i];
-        }
-        average = sum / sales.length;
-
         for (int i = 0; i < sales.length; i++) {
             if (sales[i] > average) {
                 count++;
